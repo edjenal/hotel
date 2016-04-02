@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:decorate template="/index.xhtml">
+	<ui:define name="centro">
+		<h:form>
+			<p:growl id="growl" life="4000" autoUpdate="true" />
+
+			<p:dataTable var="obj" value="#{usuarioListBean.usuarioList}"
+				rows="10" paginator="true" id="dataTable">
+
+				<p:column headerText="Chave">
+					<h:outputText value="#{obj.id}" />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{obj.nome}" />
+				</p:column>
+
+				<p:column headerText="CPF">
+					<h:outputText value="#{obj.cpf}" />
+				</p:column>
+				
+				<p:column headerText="Ativo">
+					<h:outputText value="#{obj.ativo}" />
+				</p:column>
+				
+				<p:column headerText="Perfil">
+					<h:outputText value="#{obj.perfil.descricao}" />
+				</p:column>
+
+				<p:column headerText="Ações" style="font-size: 12px;">
+					<p:button href="/usuario/usuario-modify.xhtml?id=#{obj.id}"
+						icon="ui-icon-pencil">
+					</p:button>
+					<p:commandButton
+						actionListener="#{usuarioListBean.desativar(obj.id)}"
+						icon="ui-icon-trash" update="dataTable">
+						<p:confirm header="Deletar ?" message="Deseja realmente Desativar ?" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>

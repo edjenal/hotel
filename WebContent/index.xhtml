@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Hotel</title>
+	<style type="text/css">
+body {
+	background-color: #eeeeee;
+	font-size: 12px
+}
+</style>
+</h:head>
+<h:body>
+	<div align="center">
+		<p:layout style="min-width:1020px;max-width:1020px;min-height:600px">
+			<p:layoutUnit position="north" size="100">
+				<!-- <h:graphicImage url="/tema/imagens/topo.jpg" /> -->
+			</p:layoutUnit>
+
+			<p:layoutUnit position="west" size="220">
+				<ui:insert name="menu">
+					<h:form>
+						<p:menu style="width: 200px">
+							<p:submenu label="Cliente">
+								<p:menuitem value="Novo" url="/cliente/cliente-modify.xhtml"
+									icon="ui-icon-plusthick" />
+								<p:menuitem value="Listar" url="/cliente/cliente-list.xhtml"
+									icon="ui-icon-calculator" />
+							</p:submenu>
+
+							<p:submenu label="Navegação">
+								<p:menuitem value="Home" url="/index.xhtml" icon="ui-icon-home" />
+								<p:menuitem actionListener="#{indexBean.exit}" value="Sair"
+									icon="ui-icon-power" >
+									<p:confirm header="Sair ?" message="Deseja realmente sair?" icon="ui-icon-alert" />	
+								</p:menuitem>
+							</p:submenu>
+						</p:menu>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</h:form>
+				</ui:insert>
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<div
+					style="text-align: left; padding-left: 5px; padding-right: 5px;">
+					<ui:insert name="centro">
+						<h1>Bem vindo, #{indexBean.usuario.nome}!</h1>
+					</ui:insert>
+				</div>
+			</p:layoutUnit>
+		</p:layout>
+	</div>
+</h:body>
+</html>

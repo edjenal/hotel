@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:decorate template="/index.xhtml">
+	<ui:define name="centro">
+		<h:form>
+			<p:growl id="growl" life="4000" autoUpdate="true" />
+			
+
+			<h:panelGroup rendered="#{usuarioModifyBean.edicao}">
+				<h1>Editar Usuário</h1>
+				<p:outputLabel value="Cadastro em #{usuarioModifyBean.usuario.dtCriacaoFormatada}" />
+				<input type="hidden" name="hiddenId" value="#{usuarioModifyBean.usuario.id}"/>
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{!usuarioModifyBean.edicao}">
+				<h1>Cadastrar Usuário</h1>
+			</h:panelGroup>
+
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<p:outputLabel value="Nome:" />
+				<p:inputText value="#{usuarioModifyBean.usuario.nome}"
+					required="true" requiredMessage="Nome é obrigatório" size="70"></p:inputText>
+
+				<p:outputLabel value="CPF:" />
+				<p:inputMask value="#{usuarioModifyBean.usuario.cpf}" size="12"
+					mask="999.999.999-99" required="true"
+					requiredMessage="CPF é obrigatório" id="cpf"
+					disabled="#{usuarioModifyBean.edicao}">
+					<p:ajax event="blur" listener="#{usuarioModifyBean.verificaCpf}"
+						update="cpf, ajax"></p:ajax>
+				</p:inputMask>
+
+				<p:outputLabel value="Telefone:" />
+				<p:inputMask value="#{usuarioModifyBean.usuario.telefone}" size="12"
+					mask="(99)99999-999?9">
+				</p:inputMask>
+
+				<p:outputLabel value="Email" />
+				<p:inputText id="email" value="#{usuarioModifyBean.usuario.email}"
+					validatorMessage="Email inválido" size="70">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+
+				<p:outputLabel value="Observações: " />
+				<p:inputTextarea rows="5" cols="70" maxlength="500"
+					value="#{usuarioModifyBean.usuario.obs}" />
+
+
+			</h:panelGrid>
+
+			<p:commandButton value="Gravar" id="ajax"
+				actionListener="#{usuarioModifyBean.buttonAction}"
+				styleClass="ui-priority-primary"
+				disabled="#{usuarioModifyBean.msgCpf}" />
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>

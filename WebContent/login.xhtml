@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login</title>
+	<style type="text/css">
+body {
+	background-color: #eeeeee;
+	font-size: 12px
+}
+</style>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="login.css" />
+
+	<div class="inner">
+		<h:form>
+			<p:growl id="growl" life="4000" />
+
+			<h:panelGrid columns="2" cellpadding="5" style="margin: 5px;">
+				<p:outputLabel value="Login:" />
+				<p:inputText value="#{loginBean.login}" required="true"
+					requiredMessage="Nome é obrigatório"></p:inputText>
+
+				<p:outputLabel value="Senha:" />
+				<p:password value="#{loginBean.senha}" required="true"
+					requiredMessage="Senha é obrigatória"></p:password>
+			</h:panelGrid>
+
+			<div style="text-align: center;">
+				<p:commandButton value="Entrar" id="ajax" update="growl"
+					actionListener="#{loginBean.buttonAction}"
+					styleClass="ui-priority-primary" icon="ui-icon-key"/>
+			</div>
+		</h:form>
+	</div>
+
+</h:body>
+</html>
