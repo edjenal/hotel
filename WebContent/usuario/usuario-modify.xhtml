@@ -7,14 +7,16 @@
 	<ui:define name="centro">
 		<h:form>
 			<p:growl id="growl" life="4000" autoUpdate="true" />
-			
+
 
 			<h:panelGroup rendered="#{usuarioModifyBean.edicao}">
 				<h1>Editar Usuário</h1>
-				<p:outputLabel value="Cadastro em #{usuarioModifyBean.usuario.dtCriacaoFormatada}" />
-				<input type="hidden" name="hiddenId" value="#{usuarioModifyBean.usuario.id}"/>
+				<p:outputLabel
+					value="Cadastro em #{usuarioModifyBean.usuario.dtCriacaoFormatada}" />
+				<input type="hidden" name="hiddenId"
+					value="#{usuarioModifyBean.usuario.id}" />
 			</h:panelGroup>
-			
+
 			<h:panelGroup rendered="#{!usuarioModifyBean.edicao}">
 				<h1>Cadastrar Usuário</h1>
 			</h:panelGroup>
@@ -45,6 +47,18 @@
 					<f:validateRegex
 						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				</p:inputText>
+
+				<p:outputLabel value="Perfil" />
+				<p:selectOneMenu value="#{usuarioModifyBean.usuario.perfil}">
+					<f:selectItems value="#{usuarioModifyBean.perfis}" var="def"
+						itemLabel="#{def.descricao}" itemValue="#{def}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Ativo" />
+				<p:selectOneMenu value="#{usuarioModifyBean.usuario.ativo}">
+					<f:selectItem itemLabel="Sim" itemValue="true" />
+					<f:selectItem itemLabel="Não" itemValue="false" />
+				</p:selectOneMenu>
 
 				<p:outputLabel value="Observações: " />
 				<p:inputTextarea rows="5" cols="70" maxlength="500"

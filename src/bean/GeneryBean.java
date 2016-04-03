@@ -27,7 +27,7 @@ public class GeneryBean {
 
 	public GeneryBean(boolean usuarioLogado) {
 		if (usuarioLogado) {
-			getUsuario();
+			getUsuarioLogado();
 		}
 	}
 
@@ -41,7 +41,7 @@ public class GeneryBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public UsuarioLoginDto getUsuario() {
+	public UsuarioLoginDto getUsuarioLogado() {
 		UsuarioLoginDto usuario = (UsuarioLoginDto) FacesContext.getCurrentInstance().getExternalContext()
 				.getSessionMap().get("usuarioLogado");
 		if (usuario != null) {

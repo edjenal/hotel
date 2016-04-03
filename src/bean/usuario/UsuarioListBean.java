@@ -11,12 +11,13 @@ import service.UsuarioService;
 @ManagedBean(name = "usuarioListBean")
 public class UsuarioListBean extends GeneryBean{
 	
-	private UsuarioService usuarioService = new UsuarioService();
+	private UsuarioService usuarioService;
 	
 	private List<UsuarioDto> usuarioList;
 
 	public UsuarioListBean() {
 		super(true);
+		usuarioService = new UsuarioService();
 		usuarioList = usuarioService.getAll();
 	}
 

@@ -31,6 +31,13 @@ body {
 								<p:menuitem value="Listar" url="/cliente/cliente-list.xhtml"
 									icon="ui-icon-calculator" />
 							</p:submenu>
+							
+							<p:submenu label="Usuario">
+								<p:menuitem value="Novo" url="/usuario/usuario-modify.xhtml"
+									icon="ui-icon-plusthick" />
+								<p:menuitem value="Listar" url="/usuario/usuario-list.xhtml"
+									icon="ui-icon-calculator" />
+							</p:submenu>
 
 							<p:submenu label="Navegação">
 								<p:menuitem value="Home" url="/index.xhtml" icon="ui-icon-home" />
@@ -53,7 +60,7 @@ body {
 				<div
 					style="text-align: left; padding-left: 5px; padding-right: 5px;">
 					<ui:insert name="centro">
-						<h1>Bem vindo, #{indexBean.usuario.nome}!</h1>
+						<h1>Bem vindo, #{indexBean.usuarioLogado.nome}!</h1>
 					</ui:insert>
 				</div>
 			</p:layoutUnit>
