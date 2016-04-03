@@ -1,5 +1,8 @@
 package bean.usuario;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -52,9 +55,15 @@ public class UsuarioModifyBean extends GeneryBean {
 	public void setPerfis(PerfilUsuarioEnum[] perfis) {
 		this.perfis = perfis;
 	}
+	
+	private static Map<String, String> perfis(){
+		Map<String, String> retorno = new HashMap<>();
+		retorno.put(PerfilUsuarioEnum.ADM.name(), PerfilUsuarioEnum.ADM.getDescricao());
+		return retorno;
+	}
 
 	public UsuarioModifyBean() {
-		super(true);
+		super(true, perfis());
 		usuarioService = new UsuarioService();
 		usuario = new UsuarioDto();
 		msgCpf = false;

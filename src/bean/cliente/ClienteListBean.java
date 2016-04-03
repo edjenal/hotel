@@ -1,9 +1,12 @@
 package bean.cliente;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 
+import base.PerfilUsuarioEnum;
 import bean.GeneryBean;
 import dto.ClienteDto;
 import service.ClienteService;
@@ -24,7 +27,7 @@ public class ClienteListBean extends GeneryBean{
 	}
 	
 	public ClienteListBean () {
-		super(true);
+		super(true, perfis());
 		clienteList = clienteService.getAll();
 	}
 
@@ -32,5 +35,12 @@ public class ClienteListBean extends GeneryBean{
 		clienteService.apaga(id);
 		addMessage("Chave "+id+" removida.");
 		clienteList = clienteService.getAll();
+	}
+	
+	private static Map<String, String> perfis(){
+		Map<String, String> retorno = new HashMap<>();
+		retorno.put(PerfilUsuarioEnum.ADM.name(), PerfilUsuarioEnum.ADM.getDescricao());
+		retorno.put(PerfilUsuarioEnum.CON.name(), PerfilUsuarioEnum.CON.getDescricao());
+		return retorno;
 	}
 }

@@ -1,12 +1,14 @@
 package bean;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import dto.UsuarioLoginDto;
+import base.PerfilUsuarioEnum;
+import dto.UsuarioDto;
 
 @ManagedBean(name = "generyBean")
 public class GeneryBean {
@@ -25,9 +27,11 @@ public class GeneryBean {
 		return this.nomeProjeto;
 	}
 
-	public GeneryBean(boolean usuarioLogado) {
+	private UsuarioDto usuario;
+
+	public GeneryBean(boolean usuarioLogado, Map<String, String> perfis) {
 		if (usuarioLogado) {
-			getUsuarioLogado();
+			getUsuarioLogado(perfis);
 		}
 	}
 
@@ -41,10 +45,13 @@ public class GeneryBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public UsuarioLoginDto getUsuarioLogado() {
-		UsuarioLoginDto usuario = (UsuarioLoginDto) FacesContext.getCurrentInstance().getExternalContext()
-				.getSessionMap().get("usuarioLogado");
-		if (usuario != null) {
+	public UsuarioDto getUsuarioLogado(Map<String, String> perfis) {
+
+		UsuarioDto usuario = (UsuarioDto) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("usuarioLogado");
+		
+		if (usuario != null && perfis.containsKey(usuario.getPerfil().name())) {
+			this.usuario = usuario;
 			return usuario;
 		} else {
 			try {
@@ -58,4 +65,15 @@ public class GeneryBean {
 
 	}
 
+	public UsuarioDto getUsuario() {
+		return usuario;
+	}
+
+	public boolean isAdm() {
+		return PerfilUsuarioEnum.ADM == usuario.getPerfil() ? true : false;
+	}
+
+	public boolean isConsulta() {
+		return PerfilUsuarioEnum.CON == usuario.getPerfil() ? true : false;
+	}
 }

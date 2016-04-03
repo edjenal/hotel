@@ -74,6 +74,40 @@ public class UsuarioFinder {
 		return retorno;
 	}
 	
+	public UsuarioDto getByLogin(String cpf, String senha) {
+		String sql = "select id, nome, email, telefone, obs, date_created, ativo, perfil from usuario where cpf = ? and senha = ?";
+
+		UsuarioDto retorno = null;
+		try (Connection connection = new ConnectionFactory().getConnection()) {
+
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cpf);
+			stmt.setString(2, senha);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String nome = rs.getString("nome");
+				String email = rs.getString("email");
+				String telefone = rs.getString("telefone");
+				String obs = rs.getString("obs");
+				Date dtCriacao = rs.getTimestamp("date_created");
+				Boolean ativo = rs.getBoolean("ativo");
+				PerfilUsuarioEnum perfil = PerfilUsuarioEnum.valueOf(rs.getString("perfil"));
+
+				retorno = new UsuarioDto(id, nome, cpf, email, telefone, obs, dtCriacao, ativo, perfil);
+				break;
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return retorno;
+	}
+	
 	public boolean temCpf(String cpf) {
 		String sql = "select 1 from usuario where cpf = ?";
 		

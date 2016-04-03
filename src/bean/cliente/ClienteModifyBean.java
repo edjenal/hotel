@@ -1,5 +1,8 @@
 package bean.cliente;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -7,6 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpServletRequest;
 
+import base.PerfilUsuarioEnum;
 import bean.GeneryBean;
 import dto.ClienteDto;
 import service.ClienteService;
@@ -45,9 +49,16 @@ public class ClienteModifyBean extends GeneryBean {
 	public void setEdicao(boolean edicao) {
 		this.edicao = edicao;
 	}
+	
+	private static Map<String, String> perfis(){
+		Map<String, String> retorno = new HashMap<>();
+		retorno.put(PerfilUsuarioEnum.ADM.name(), PerfilUsuarioEnum.ADM.getDescricao());
+		retorno.put(PerfilUsuarioEnum.CON.name(), PerfilUsuarioEnum.CON.getDescricao());
+		return retorno;
+	}
 
 	public ClienteModifyBean() {
-		super(true);
+		super(true, perfis());
 		clienteService = new ClienteService();
 		cliente = new ClienteDto();
 	}

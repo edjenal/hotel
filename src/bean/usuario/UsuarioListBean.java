@@ -1,9 +1,12 @@
 package bean.usuario;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 
+import base.PerfilUsuarioEnum;
 import bean.GeneryBean;
 import dto.UsuarioDto;
 import service.UsuarioService;
@@ -14,9 +17,15 @@ public class UsuarioListBean extends GeneryBean{
 	private UsuarioService usuarioService;
 	
 	private List<UsuarioDto> usuarioList;
+	
+	private static Map<String, String> perfis(){
+		Map<String, String> retorno = new HashMap<>();
+		retorno.put(PerfilUsuarioEnum.ADM.name(), PerfilUsuarioEnum.ADM.getDescricao());
+		return retorno;
+	}
 
 	public UsuarioListBean() {
-		super(true);
+		super(true, perfis());
 		usuarioService = new UsuarioService();
 		usuarioList = usuarioService.getAll();
 	}

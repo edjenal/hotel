@@ -1,14 +1,11 @@
 package service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import base.PerfilUsuarioEnum;
 import dto.UsuarioDto;
-import dto.UsuarioLoginDto;
 import jdbc.UsuarioFinder;
 import jdbc.UsuarioRepository;
+import util.ConvertPasswordToMD5;
 import util.ValidaCpf;
 
 public class UsuarioService {
@@ -16,16 +13,17 @@ public class UsuarioService {
 	private UsuarioFinder usuarioFinder = new UsuarioFinder();
 	private UsuarioRepository usuarioRepository = new UsuarioRepository();
 
-	public static UsuarioLoginDto getUsuario(String login, String senha) {
+	public UsuarioDto getUsuario(String login, String senha) {
 
 		if (login != null && !login.equals("") && senha != null && !senha.equals("")) {
-			UsuarioLoginDto usuario = new UsuarioLoginDto();
-			usuario.setId(1);
-			usuario.setNome("Fulano");
-			Map<String, PerfilUsuarioEnum> perfils = new HashMap<>();
-			perfils.put(PerfilUsuarioEnum.ADM.name(), PerfilUsuarioEnum.ADM);
-			usuario.setPerfils(perfils);
-			return usuario;
+			return usuarioFinder.getByLogin(login, ConvertPasswordToMD5.convertPasswordToMD5(senha));
+			/*
+			 * UsuarioLoginDto usuario = new UsuarioLoginDto();
+			 * usuario.setId(1); usuario.setNome("Fulano"); Map<String,
+			 * PerfilUsuarioEnum> perfils = new HashMap<>();
+			 * perfils.put(PerfilUsuarioEnum.ADM.name(), PerfilUsuarioEnum.ADM);
+			 * usuario.setPerfils(perfils); return usuario;
+			 */
 		} else {
 			return null;
 		}
