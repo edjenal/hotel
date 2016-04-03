@@ -6,8 +6,6 @@
 <ui:decorate template="/index.xhtml">
 	<ui:define name="centro">
 		<h:form>
-			<p:growl id="growl" life="4000" autoUpdate="true" />
-
 			<p:dataTable var="obj" value="#{usuarioListBean.usuarioList}"
 				rows="10" paginator="true" id="dataTable">
 
@@ -38,7 +36,7 @@
 					</p:button>
 					<p:commandButton
 						actionListener="#{usuarioListBean.desativar(obj.id)}"
-						icon="ui-icon-trash" update="dataTable" rendered="#{obj.ativo}">
+						icon="ui-icon-cancel" update="dataTable" rendered="#{obj.ativo}">
 						<p:confirm header="Desativar ?"
 							message="Deseja realmente Desativar ?" icon="ui-icon-alert" />
 					</p:commandButton>

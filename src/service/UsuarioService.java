@@ -67,7 +67,7 @@ public class UsuarioService {
 	}
 
 	public void alteraSenha(UsuarioDto obj) {
-		if (obj != null) {
+		if (obj != null && obj.getId() != null && obj.getSenha() != null && !obj.getSenha().equals("")) {
 			usuarioRepository.alteraSenha(obj);
 		}
 	}

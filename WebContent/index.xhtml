@@ -15,8 +15,15 @@ body {
 </style>
 </h:head>
 <h:body>
+	<p:growl life="4000" autoUpdate="true" />
+
+	<f:metadata>
+		<f:event type="preRenderView" rendered="#{facesContext.postBack}"
+			listener="#{indexBean.message}" />
+	</f:metadata>
+	
 	<div align="center">
-		<p:layout style="min-width:1020px;max-width:1020px;min-height:600px">
+		<p:layout style="min-width:1200px;max-width:1200px;min-height:700px">
 			<p:layoutUnit position="north" size="100">
 				<!-- <h:graphicImage url="/tema/imagens/topo.jpg" /> -->
 			</p:layoutUnit>
@@ -31,7 +38,7 @@ body {
 								<p:menuitem value="Listar" url="/cliente/cliente-list.xhtml"
 									icon="ui-icon-calculator" />
 							</p:submenu>
-							
+
 							<p:submenu label="Usuario" rendered="#{indexBean.adm}">
 								<p:menuitem value="Novo" url="/usuario/usuario-modify.xhtml"
 									icon="ui-icon-plusthick" />
@@ -41,9 +48,12 @@ body {
 
 							<p:submenu label="Navegação">
 								<p:menuitem value="Home" url="/index.xhtml" icon="ui-icon-home" />
+								<p:menuitem value="Trocar Senha"
+									url="/usuario/troca-senha.xhtml" icon="ui-icon-key" />
 								<p:menuitem actionListener="#{indexBean.exit}" value="Sair"
-									icon="ui-icon-power" >
-									<p:confirm header="Sair ?" message="Deseja realmente sair?" icon="ui-icon-alert" />	
+									icon="ui-icon-power">
+									<p:confirm header="Sair ?" message="Deseja realmente sair?"
+										icon="ui-icon-alert" />
 								</p:menuitem>
 							</p:submenu>
 						</p:menu>

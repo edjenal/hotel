@@ -6,8 +6,6 @@
 <ui:decorate template="/index.xhtml">
 	<ui:define name="centro">
 		<h:form>
-			<p:growl id="growl" life="4000" autoUpdate="true" />
-
 			<p:dataTable var="obj" value="#{clienteListBean.clienteList}"
 				rows="10" paginator="true" id="dataTable">
 

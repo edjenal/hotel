@@ -12,8 +12,22 @@ import dto.UsuarioDto;
 
 @ManagedBean(name = "generyBean")
 public class GeneryBean {
+	
+	public void message() {
+		String msgSucesso = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("msgSucesso");
+		if (msgSucesso != null && !"".equals(msgSucesso)){
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgSucesso", null);
+			
+			addMessage(msgSucesso);
+		}
+	}
 
 	private String nomeProjeto = "/hotel/";
+
+	public void setNomeProjeto(String nomeProjeto) {
+		this.nomeProjeto = nomeProjeto;
+	}
 
 	public String loginPage() {
 		return this.nomeProjeto + "login.xhtml";
@@ -49,7 +63,7 @@ public class GeneryBean {
 
 		UsuarioDto usuario = (UsuarioDto) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("usuarioLogado");
-		
+
 		if (usuario != null && perfis.containsKey(usuario.getPerfil().name())) {
 			this.usuario = usuario;
 			return usuario;
