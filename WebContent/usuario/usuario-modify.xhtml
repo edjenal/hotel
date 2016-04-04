@@ -20,11 +20,11 @@
 
 			<h:panelGrid columns="2" cellpadding="5">
 
-				<p:outputLabel value="Nome:" />
+				<p:outputLabel value="* Nome:" />
 				<p:inputText value="#{usuarioModifyBean.usuario.nome}"
 					required="true" requiredMessage="Nome é obrigatório" size="70"></p:inputText>
 
-				<p:outputLabel value="CPF:" />
+				<p:outputLabel value="* CPF:" />
 				<p:inputMask value="#{usuarioModifyBean.usuario.cpf}" size="12"
 					mask="999.999.999-99" required="true"
 					requiredMessage="CPF é obrigatório" id="cpf"
@@ -45,13 +45,13 @@
 						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				</p:inputText>
 
-				<p:outputLabel value="Perfil" />
+				<p:outputLabel value="* Perfil" />
 				<p:selectOneMenu value="#{usuarioModifyBean.usuario.perfil}">
 					<f:selectItems value="#{usuarioModifyBean.perfis}" var="def"
 						itemLabel="#{def.descricao}" itemValue="#{def}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Ativo" />
+				<p:outputLabel value="* Ativo" />
 				<p:selectOneMenu value="#{usuarioModifyBean.usuario.ativo}">
 					<f:selectItem itemLabel="Sim" itemValue="true" />
 					<f:selectItem itemLabel="Não" itemValue="false" />

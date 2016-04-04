@@ -18,12 +18,11 @@ body {
 	<p:growl life="4000" autoUpdate="true" />
 
 	<f:metadata>
-		<f:event type="preRenderView" rendered="#{facesContext.postBack}"
-			listener="#{indexBean.message}" />
+		<f:event type="preRenderView" listener="#{indexBean.menssage}" />
 	</f:metadata>
 	
 	<div align="center">
-		<p:layout style="min-width:1200px;max-width:1200px;min-height:700px">
+		<p:layout fullPage="true">
 			<p:layoutUnit position="north" size="100">
 				<!-- <h:graphicImage url="/tema/imagens/topo.jpg" /> -->
 			</p:layoutUnit>

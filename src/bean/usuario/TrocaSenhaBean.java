@@ -45,12 +45,11 @@ public class TrocaSenhaBean extends GeneryBean {
 		Usuario.setSenha(senha);
 		usuarioService.alteraSenha(Usuario);
 
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgSucesso", "Sucesso");
+		this.salvarInfoMenssage("Senha modificada com sucesso.");
 
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(indexPage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

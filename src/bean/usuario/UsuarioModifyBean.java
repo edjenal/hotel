@@ -1,5 +1,6 @@
 package bean.usuario;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,13 +90,19 @@ public class UsuarioModifyBean extends GeneryBean {
 
 		usuarioService.garavar(usuario);
 
-		addMessage("Sucesso.");
+		salvarInfoMenssage("Usuário salvo.");
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(this.getNomeProjeto()+"usuario/usuario-list.html");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void verificaCpf(AjaxBehaviorEvent actionEvent) {
 		String cpfValido = usuarioService.temCpf(usuario.getCpf());
 		if (cpfValido != null) {
-			addErroMessage(cpfValido);
+			addErroMessageNow(cpfValido);
 			msgCpf = true;
 		} else {
 			msgCpf = false;

@@ -12,14 +12,114 @@ import dto.UsuarioDto;
 
 @ManagedBean(name = "generyBean")
 public class GeneryBean {
-	
-	public void message() {
-		String msgSucesso = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("msgSucesso");
-		if (msgSucesso != null && !"".equals(msgSucesso)){
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgSucesso", null);
-			
-			addMessage(msgSucesso);
+
+	public GeneryBean(boolean usuarioLogado, Map<String, String> perfis) {
+		if (usuarioLogado) {
+			getUsuarioLogado(perfis);
+		}
+	}
+
+	/*
+	 * Valida se o usuário está logado no sistema e se possui permissão de acesso para a tela
+	 */
+	public void getUsuarioLogado(Map<String, String> perfis) {
+
+		UsuarioDto usuario = (UsuarioDto) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("usuarioLogado");
+
+		if (usuario != null) {
+			if (perfis.containsKey(usuario.getPerfil().name())) {
+				this.usuario = usuario;
+			} else {
+				try {
+					FacesContext.getCurrentInstance().getExternalContext().redirect(indexPage());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect(loginPage());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+	 * Exibe mensagens na mesma tela
+	 */
+	public void addInfoMessageNow(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public void addWarnMessageNow(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public void addErroMessageNow(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public void addFatalMessageNow(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	/*
+	 * Salva mensagem para exibir na próxima tela
+	 */
+	public void salvarInfoMenssage(String valor) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgInfo", valor);
+	}
+
+	public void salvarWarnMenssage(String valor) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgWarn", valor);
+	}
+
+	public void salvarErrorMenssage(String valor) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgError", valor);
+	}
+
+	public void salvarFatalMenssage(String valor) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgFatal", valor);
+	}
+
+	/*
+	 * Exibe mensagens na proxima tela
+	 */
+	public void menssage() {
+		String msgInfo = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("msgInfo");
+		if (msgInfo != null && !"".equals(msgInfo)) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgInfo", null);
+
+			addInfoMessageNow(msgInfo);
+		}
+
+		String msgWarn = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("msgWarn");
+		if (msgWarn != null && !"".equals(msgWarn)) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgWarn", null);
+
+			addWarnMessageNow(msgWarn);
+		}
+
+		String msgError = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("msgError");
+		if (msgError != null && !"".equals(msgError)) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgError", null);
+
+			addWarnMessageNow(msgError);
+		}
+
+		String msgFatal = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("msgFatal");
+		if (msgFatal != null && !"".equals(msgFatal)) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("msgFatal", null);
+
+			addWarnMessageNow(msgFatal);
 		}
 	}
 
@@ -42,42 +142,6 @@ public class GeneryBean {
 	}
 
 	private UsuarioDto usuario;
-
-	public GeneryBean(boolean usuarioLogado, Map<String, String> perfis) {
-		if (usuarioLogado) {
-			getUsuarioLogado(perfis);
-		}
-	}
-
-	public void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-
-	public void addErroMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-
-	public UsuarioDto getUsuarioLogado(Map<String, String> perfis) {
-
-		UsuarioDto usuario = (UsuarioDto) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("usuarioLogado");
-
-		if (usuario != null && perfis.containsKey(usuario.getPerfil().name())) {
-			this.usuario = usuario;
-			return usuario;
-		} else {
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect(loginPage());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-	}
 
 	public UsuarioDto getUsuario() {
 		return usuario;

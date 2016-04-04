@@ -49,7 +49,7 @@ public class LoginBean extends GeneryBean {
 				e.printStackTrace();
 			}
 		} else {
-			addErroMessage("Usuário não localizado");
+			addErroMessageNow("Usuário não localizado");
 		}
 	}
 }

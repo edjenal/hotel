@@ -48,7 +48,7 @@ public class UsuarioListBean extends GeneryBean{
 	
 	public void desativar(int id){
 		usuarioService.desativar(id);
-		addMessage("Chave "+id+" desativada.");
+		addInfoMessageNow("Chave "+id+" desativada.");
 		usuarioList = usuarioService.getAll();
 	}
 

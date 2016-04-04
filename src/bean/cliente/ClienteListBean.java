@@ -33,7 +33,7 @@ public class ClienteListBean extends GeneryBean{
 
 	public void deletar(Integer id){
 		clienteService.apaga(id);
-		addMessage("Chave "+id+" removida.");
+		addInfoMessageNow("Chave "+id+" removida.");
 		clienteList = clienteService.getAll();
 	}
 	

@@ -18,11 +18,11 @@
 
 			<h:panelGrid columns="2" cellpadding="5">
 
-				<p:outputLabel value="Nome:" />
+				<p:outputLabel value="* Nome:" />
 				<p:inputText value="#{clienteModifyBean.cliente.nome}"
 					required="true" requiredMessage="Nome é obrigatório" size="70"></p:inputText>
 
-				<p:outputLabel value="CPF:" />
+				<p:outputLabel value="* CPF:" />
 				<p:inputMask value="#{clienteModifyBean.cliente.cpf}" size="12"
 					mask="999.999.999-99" required="true"
 					requiredMessage="CPF é obrigatório" id="cpf"

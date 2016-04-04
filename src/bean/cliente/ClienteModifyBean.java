@@ -1,5 +1,6 @@
 package bean.cliente;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,13 +82,19 @@ public class ClienteModifyBean extends GeneryBean {
 		
 		clienteService.garavar(cliente);
 		
-		addMessage("Sucesso.");
+		salvarInfoMenssage("Cliente salvo.");
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(this.getNomeProjeto()+"cliente/cliente-list.html");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void verificaCpf(AjaxBehaviorEvent actionEvent) {
 		String cpfValido = clienteService.temCpf(cliente.getCpf());
 		if (cpfValido != null) {
-			addErroMessage(cpfValido);
+			addErroMessageNow(cpfValido);
 			msgCpf = true;
 		} else {
 			msgCpf = false;
