@@ -85,7 +85,7 @@ public class ClienteModifyBean extends GeneryBean {
 		salvarInfoMenssage("Cliente salvo.");
 		
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(this.getNomeProjeto()+"cliente/cliente-list.html");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(this.getNomeProjeto()+"cliente/cliente-list.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

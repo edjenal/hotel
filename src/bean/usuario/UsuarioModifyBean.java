@@ -93,7 +93,7 @@ public class UsuarioModifyBean extends GeneryBean {
 		salvarInfoMenssage("Usuário salvo.");
 		
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(this.getNomeProjeto()+"usuario/usuario-list.html");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(this.getNomeProjeto()+"usuario/usuario-list.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
