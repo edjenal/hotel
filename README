@@ -1,1 +1,9 @@
-This is a git repo
+Projeto usando:
+* JSF (Primefaces 2.2.8 com tema do BootStrap);
+* MySQL (sem JPA por motivos de velocidade e qualidade de informações);
+
+Até agora foram criadas as funcionalidades:
+CRUD de usuário;
+Validação de login;
+Validação de perfil para acesso a tela (funcionalidade);
+CRUD de Cliente;
