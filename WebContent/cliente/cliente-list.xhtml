@@ -23,12 +23,13 @@
 
 				<p:column headerText="Ações" style="font-size: 12px;">
 					<p:button href="/cliente/cliente-modify.xhtml?id=#{obj.id}"
-						icon="ui-icon-pencil">
+						icon="ui-icon-pencil" title="Alterar">
 					</p:button>
 					<p:commandButton
 						actionListener="#{clienteListBean.deletar(obj.id)}"
-						icon="ui-icon-trash" update="dataTable">
-						<p:confirm header="Deletar ?" message="Deseja realmente deletar?" icon="ui-icon-alert" />
+						icon="ui-icon-trash" update="dataTable" title="Deletar">
+						<p:confirm header="Deletar ?" message="Deseja realmente deletar?"
+							icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

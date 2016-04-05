@@ -22,8 +22,8 @@
 				</p:column>
 
 				<p:column headerText="Ativo">
-					<h:outputText value="Sim" rendered="#{obj.ativo}"/>
-					<h:outputText value="Não" rendered="#{!obj.ativo}"/>
+					<h:outputText value="Sim" rendered="#{obj.ativo}" />
+					<h:outputText value="Não" rendered="#{!obj.ativo}" />
 				</p:column>
 
 				<p:column headerText="Perfil">
@@ -32,11 +32,12 @@
 
 				<p:column headerText="Ações" style="font-size: 12px;">
 					<p:button href="/usuario/usuario-modify.xhtml?id=#{obj.id}"
-						icon="ui-icon-pencil">
+						icon="ui-icon-pencil" title="Alterar">
 					</p:button>
 					<p:commandButton
 						actionListener="#{usuarioListBean.desativar(obj.id)}"
-						icon="ui-icon-cancel" update="dataTable" rendered="#{obj.ativo}">
+						title="Desativar" icon="ui-icon-cancel" update="dataTable"
+						rendered="#{obj.ativo}">
 						<p:confirm header="Desativar ?"
 							message="Deseja realmente Desativar ?" icon="ui-icon-alert" />
 					</p:commandButton>

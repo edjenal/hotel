@@ -32,6 +32,7 @@ public class GeneryBean {
 				this.usuario = usuario;
 			} else {
 				try {
+					salvarWarnMenssage("Você não tem acesso à essa funcionalidade.");
 					FacesContext.getCurrentInstance().getExternalContext().redirect(indexPage());
 				} catch (IOException e) {
 					e.printStackTrace();

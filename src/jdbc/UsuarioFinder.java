@@ -14,7 +14,7 @@ import dto.UsuarioDto;
 public class UsuarioFinder {
 
 	public List<UsuarioDto> getAll() {
-		String sql = "select id, nome, cpf, email, telefone, ativo, perfil from usuario";
+		String sql = "select id, nome, cpf, email, telefone, ativo, perfil from usuario where cpf <> 'adm'";
 
 		List<UsuarioDto> retorno = new ArrayList<>();
 		try (Connection connection = new ConnectionFactory().getConnection()) {
