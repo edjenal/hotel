@@ -25,10 +25,9 @@ create table usuario (
   constraint uc_usuario unique (id,cpf)
 );
 
-/*
-INSERT INTO `usuario` (`id`, `nome`, `cpf`, `email`, `telefone`, `obs`, `date_created`, `ativo`, `perfil`, `senha`) VALUES
-(1, 'adm', 'adm', '', '', '', '2016-04-03 11:02:23', 1, 'ADM', '81dc9bdb52d04dc20036dbd8313ed055');
 
-INSERT INTO `usuario` (`id`, `nome`, `cpf`, `email`, `telefone`, `obs`, `date_created`, `ativo`, `perfil`, `senha`) VALUES
-(3, 'Edjenal', '02149084538', '', '', '', '2016-04-03 11:02:23', 1, 'CON', '81dc9bdb52d04dc20036dbd8313ed055');
-*/
+INSERT INTO usuario (id, nome, cpf, email, telefone, obs, date_created, ativo, perfil, senha) VALUES
+(1, 'Adminstrador', 'adm', '', '', '', '2016-04-03 11:02:23', 1, 'ADM', '81dc9bdb52d04dc20036dbd8313ed055');
+
+INSERT INTO usuario (id, nome, cpf, email, telefone, obs, date_created, ativo, perfil, senha) VALUES
+(2, 'Operador', 'operador', '', '', '', '2016-04-03 11:02:23', 1, 'CON', '81dc9bdb52d04dc20036dbd8313ed055');
